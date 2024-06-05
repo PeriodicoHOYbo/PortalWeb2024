@@ -79,7 +79,7 @@ console.log(userDB)
                 <div>
                     <BannerLateral carpeta="BannerDerecho" items={[1, 2, 3, 4]} click={handlerClickEnlace}></BannerLateral>
                 </div>
-                <main className={`overflow-hidden ${styles.main}`}>
+                <main className={`${styles.main}`}>
                     {children}
                    {userDB &&  userDB !== undefined &&userDB.EdicionDigital &&  userDB.EdicionDigital !== undefined&& <Link href={`/FlipBook?edicion=${ Object.keys(userDB.EdicionDigital).pop()}`} legacyBehavior scroll={false}>
                         <a onClick={handlerClick} target="_blank">
