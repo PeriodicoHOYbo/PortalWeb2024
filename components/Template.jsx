@@ -62,7 +62,7 @@ function TemplateFour({ color, topic, grid }) {
                 ${elements == true && styles.allVisible}`}>
 
                 {userDB && dataForDate.length > 0 && dataForDate.map((i, index) =>
-                    <Fade cascade>
+                    <Fade cascade key={index}>
 
                         {userDB[topic]["Posts"] && userDB[topic]["Posts"][`PostImage_${i}`] && userDB[topic]["Posts"][`PostImage_${i}`].state !== undefined && userDB[topic]["Posts"][`PostImage_${i}`].state === 'Publicado' && router.pathname !== "/Admin" &&
                             <div key={index} >
