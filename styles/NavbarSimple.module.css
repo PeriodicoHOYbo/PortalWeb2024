@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  top: 0px;
   width: 100%;
   color: white;
   font-size: 10px;
@@ -98,6 +99,6 @@
 @media (max-width: 765px) {
   .nav {
     /*font-size: 9px;*/
-    display: none;
+    /* display: none; */
   }
 }

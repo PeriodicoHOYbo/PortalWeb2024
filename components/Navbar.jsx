@@ -52,10 +52,24 @@ export default function Navbar() {
             </div>
 
             <div className={style.container}  >
-                <nav className={`${style.nav}`} style={{ padding: '0 110px', position: 'relative' }}>
+                <div className='flex justify-between md:hidden pb-3 px-3'>
+                     <Link href="/" legacyBehavior scroll={false}>
+                        <a className={`relative pt-[15px] top-0 left-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                            <span className=' h-[40px] rounded-full flex justify-center items-center bg-white rounded'><img src={'/inicio_v2.jpeg'} className="block h-[35px] sm:h-[40px] lg:h-[50px]  rounded-full cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
+                        </a>
+                    </Link>
+                    <Link href="https://clasificados.hoy.bo/" legacyBehavior scroll={false}>
+                        <a className={`relative pt-[15px] top-0 bottom-0 my-auto  right-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                            <span className='  h-[40px] rounded-full flex justify-center items-center bg-white rounded my-auto '><img src={'/clasificados_v2.jpeg'} className="block h-[35px] sm:h-[40px] lg:h-[50px]  rounded-full cursor-pointer" onClick={() => router.push('https://clasificados.hoy.bo/')} alt="" /></span>
+                        </a>
+                    </Link>
+                </div>
+           
+
+                <nav className={`${style.nav} md:px-[140px]`} style={{ position: 'relative' }}>
                     <Link href="/" legacyBehavior scroll={false}>
-                        <a className={` absolute pt-[5px] h-[40px] top-0 left-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
-                            <span className=' h-[40px] rounded-full flex justify-center items-center bg-white rounded'><img src={'/inicio_v2.jpeg'} className="block h-[40px] rounded-full cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
+                        <a className={`hidden md:inline-block absolute pt-[15px] h-[100px] top-0 left-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                            <span className=' h-[40px] rounded-full flex justify-center items-center bg-white rounded'><img src={'/inicio_v2.jpeg'} className="block h-[35px] sm:h-[40px] lg:h-[50px] rounded-full cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
                         </a>
                     </Link>
                     <Link href="#Sociedad" legacyBehavior scroll={false}>
@@ -104,8 +118,8 @@ export default function Navbar() {
                         <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} >CLASIFICADOS</a>
                     </Link>
                     <Link href="https://clasificados.hoy.bo/" legacyBehavior scroll={false}>
-                        <a className={`absolute pt-[5px] top-0 bottom-0 my-auto  right-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
-                            <span className='  h-[40px] rounded-full flex justify-center items-center bg-white rounded my-auto '><img src={'/clasificados_v2.jpeg'} className="block h-[40px] rounded-full cursor-pointer" onClick={() => router.push('https://clasificados.hoy.bo/')} alt="" /></span>
+                        <a className={`hidden md:inline-block absolute pt-[15px] top-0 bottom-0 my-auto  right-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                            <span className='  h-[40px] rounded-full flex justify-center items-center bg-white rounded my-auto '><img src={'/clasificados_v2.jpeg'} className="block  h-[35px] sm:h-[40px] lg:h-[50px]  rounded-full cursor-pointer" onClick={() => router.push('https://clasificados.hoy.bo/')} alt="" /></span>
                         </a>
                     </Link>
                 </nav>

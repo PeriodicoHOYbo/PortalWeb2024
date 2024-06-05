@@ -1,8 +1,3 @@
-
-
-
-
-
 import Head from 'next/head'
 import Image from 'next/image'
 import NavbarSimple from '../components/NavbarSimple'
@@ -14,14 +9,12 @@ import TemplateNota from '../components/TemplateNota'
 import Layout from '../layout/Layout'
 import TextEditor from '../components/TextEditor'
 import { handleSignOut, writeUserData, getSpecificData } from '../firebase/utils'
-import { getIndexStorage } from '../firebase/storage'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import parse from 'html-react-parser';
 import Banner from '../components/Banner'
 import BannerNotas from '../components/BannerNotas'
 import Modal from '../components/Modal'
-import Link from 'next/link'
 import Temporizador from '../components/Temporizador'
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
 
@@ -50,9 +43,6 @@ const ReactQuill = dynamic(() => import('../components/content'), {
 })
 
 
-
-
-
 function TemplateOne() {
   const [textArea, setTextArea] = useState("");
   const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, specificData, setUserSpecificData } = useUser()
@@ -73,18 +63,6 @@ function TemplateOne() {
 
   const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
-
-
-
-
-  // function handlerPlayMusic() {
-  //   console.log('play')
-  //   load('/news_1.mp3', {
-  //     autoplay: true,
-  //     loop: true,
-  //   });
-  // }
-
 
 
   const router = useRouter()
@@ -223,8 +201,6 @@ function TemplateOne() {
           <div className={styles.containerBanner}>
             {userDB && userDB[validate()] && userDB[validate()]["BannerTop"] && <Banner ruta={validate()} carpeta="BannerTop" click={handlerClickEnlace}></Banner>}
           </div>
-
-
 
           <div className={`${styles.viewer} ${formViewer == false && styles.hideForm}`}>
 

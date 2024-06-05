@@ -86,8 +86,6 @@ console.log(userDB)
                             <img src='/ninoPDF-optimizado.jpeg' className={`${styles.animationNinoPDF}`} />
                         </a>
                     </Link>}
-
-
                     <NavbarSimple footer='layout'></NavbarSimple>
                     <footer className={styles.footer} id="Nosotros">
                         <div>
