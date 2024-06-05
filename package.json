@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
     "@mantine/core": "^5.8.3",
     "@mantine/hooks": "^5.8.3",
     "@mantine/tiptap": "^5.8.3",
@@ -24,6 +25,7 @@
     "next": "^13.5.6",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
+    "react-awesome-reveal": "^4.2.11",
     "react-clock": "^4.0.0",
     "react-dom": "18.2.0",
     "react-hook-speech-to-text": "^0.8.0",
