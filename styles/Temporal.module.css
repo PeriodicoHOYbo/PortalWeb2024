@@ -1,10 +1,9 @@
 .main {
   position: relative;
-
   top: 0;
   background-color: white;
   margin: 0;
-  flex: 1;
+  /* flex: 1; */
   display: grid;
   grid-template-columns: 15fr 1fr;
   grid-gap: 5px;

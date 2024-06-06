@@ -9,15 +9,14 @@
 
 .nav {
   font-size: 14px;
-  padding: 2px 0;
   display: flex;  
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
   border-bottom: 5px solid #ffffff;
   position: relative;
-  background: #00404a;
   z-index: 1000;
+  background: #00404a;
 }
 
 
@@ -98,7 +97,6 @@
 
 @media (max-width: 765px) {
   .nav {
-    /*font-size: 9px;*/
-    /* display: none; */
+    font-size: 9px;
   }
 }
