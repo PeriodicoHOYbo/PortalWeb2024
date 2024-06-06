@@ -148,6 +148,7 @@ function Home() {
                   allowfullscreen />
                 {/* <p className={styles.videoDescription}>Las noticias mas relevantes en <br /> HOY.BO</p> */}
               </div>
+
             </div>
           }
 
