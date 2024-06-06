@@ -85,7 +85,6 @@ function Home() {
   }
 
 
-console.log(window.href)
 
   return (
     <>
