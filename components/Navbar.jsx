@@ -64,8 +64,6 @@ export default function Navbar() {
                         </a>
                     </Link>
                 </div>
-           
-
                 <nav className={`${style.nav} md:px-[140px]`} style={{ position: 'relative' }}>
                     <Link href="/" legacyBehavior scroll={false}>
                         <a className={`hidden md:inline-block absolute pt-[15px] h-[100px] top-0 left-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
@@ -111,7 +109,7 @@ export default function Navbar() {
                     <Link href="#Nosotros" legacyBehavior scroll={false}>
                         <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} >NOSOTROS</a>
                     </Link>
-                    <Link href="/EdicionDigital" legacyBehavior scroll={false}>
+                    <Link href="#EdicionDigital" legacyBehavior scroll={false}>
                         <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} >EDICION DIGITAL</a>
                     </Link>
                     <Link href="https://clasificados.hoy.bo/" legacyBehavior scroll={false}>

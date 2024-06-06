@@ -19,6 +19,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { listAll } from 'firebase/storage'
 import Temporizador from '../components/Temporizador'
+import { usePathname } from 'next/navigation'
 
 const YOUTUBE_PLAYLIST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/playlistItems'
 const YOUTUBE_API_KEY = "AIzaSyBZkk7x_tGRbf-Yg_A7Y9QYcBQe7T9QtWU"
@@ -29,7 +30,7 @@ var fetch_url = `${YOUTUBE_PLAYLIST_ITEMS_API}`
 function Home() {
   const { userDB, setUserData, monthAndYear, setUserSuccess, success, postsIMG, showImg, showVideo, date, setUserDate, zoomIMG, setZoomIMG, bgOpacity, setBgOpacity, timer } = useUser()
   const router = useRouter()
-
+  const pathname = usePathname()
   const [listYT, setListYT] = useState(false);
 
 
@@ -84,7 +85,7 @@ function Home() {
   }
 
 
-
+console.log(window.href)
 
   return (
     <>
