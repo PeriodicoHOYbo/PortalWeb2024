@@ -10,7 +10,6 @@ function MyBook(props) {
     const router = useRouter()
     let navegador = navigator.userAgent;
     const [zoom, setZoom] = useState(false)
-    console.log(window.screen.width)
 
     return (
         userDB && userDB !== undefined && userDB.EdicionDigital && userDB.EdicionDigital[router.query.edicion] && userDB.EdicionDigital[router.query.edicion] !== undefined && <div className='absolute sm:max-h-[105vw] flex justify-center items-center bg-[#565a5a] min-h-screen w-full overflow-hidden '>
@@ -21,7 +20,7 @@ function MyBook(props) {
             <button className='fixed text-[20px]  h-[40px] w-[200px] text-white rounded-full inline-block right-[0px] left-0 bottom-[50px] mx-auto bg-[#00000080] z-20 lg:bottom-[20px]' onClick={() => setZoom(!zoom)}>{zoom ? 'desabilitar zoom +' : 'habilitar zoom +'}</button>
             {zoom === false && <button className='fixed text-[20px]  h-[40px] w-[100px] text-white rounded-full inline-block left-[0px] top-0 bottom-0 my-auto bg-[#00000080] z-20 lg:left-[20px] pointer-events-none' >Anterior</button>}
             {zoom === false && <button className='fixed text-[20px]  h-[40px] w-[100px] text-white rounded-full inline-block right-[0px] top-0 bottom-0 my-auto bg-[#00000080] z-20 lg:right-[20px] pointer-events-none' >Siguiente</button>}
-
+           
             <div className={`${zoom && 'pointer-events-none'}`} onClick={(e) => e.preventDefault()}>
 
 
@@ -37,10 +36,10 @@ function MyBook(props) {
                     mobileScrollSupport={true}
                 >
                     {/* {Object.values(userDB.EdicionDigital[ router.query.edicion]).map((i, index) => <img src={`${i.url}`} key={index} />)} */}
-                    {Object.values(userDB.EdicionDigital[router.query.edicion]).map((i, index) => {
+                    {Object.values(userDB.EdicionDigital[router.query.edicion].vistas).map((i, index) => {
                         return <div className='relative w-[80vw]  flex justify-center' key={index}>
-                            <img className='inline-block absolute px-[10px] w-full h-full object-contain object-center' src={`${i.url}`} />
-                        </div>
+                         <img className='inline-block absolute px-[10px] w-full h-full object-contain object-center' src={`${i.url}`}  />
+</div>
 
                     })}
                 </HTMLFlipBook>

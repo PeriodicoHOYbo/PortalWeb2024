@@ -52,7 +52,7 @@ export default function Navbar() {
             </div>
 
             <div className={style.container}  >
-                <div className='flex justify-between md:hidden pb-3 px-3'>
+                <div className='flex justify-between md:hidden pb-1.5 px-1.5'>
                      <Link href="/" legacyBehavior scroll={false}>
                         <a className={`relative pt-[15px] top-0 left-[0px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
                             <span className=' h-[40px] rounded-full flex justify-center items-center bg-white rounded'><img src={'/inicio_v2.jpeg'} className="block h-[35px] sm:h-[40px] lg:h-[50px]  rounded-full cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
