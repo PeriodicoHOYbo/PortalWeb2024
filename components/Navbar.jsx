@@ -13,8 +13,8 @@ export default function Navbar() {
         setUserShowVideo(false)
 
     }
-    function handleClickYT() {
-        setUserShowVideo(true)
+    function handleClickYT(data) {
+        setUserShowVideo(data)
         setUserShowImg(false)
     }
     function handlerClick() {
@@ -104,13 +104,13 @@ export default function Navbar() {
                         <a className={`${style.link} ${pathname == "#Imagenes" ? style.active : ''}`} onClick={handleClick}>IMÁGENES</a>
                     </Link> */}
                     <Link href="#Videos" legacyBehavior scroll={false}>
-                        <a className={`${style.link} ${pathname == "#Videos" ? style.active : ''}`} onClick={handleClickYT}>VIDEOS</a>
+                        <a className={`${style.link} ${pathname == "#Videos" ? style.active : ''}`} onClick={()=>handleClickYT('YouTube')}>VIDEOS</a>
                     </Link>
                     <Link href="#Nosotros" legacyBehavior scroll={false}>
                         <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} >NOSOTROS</a>
                     </Link>
                     <Link href="#EdicionDigital" legacyBehavior scroll={false}>
-                        <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} >EDICION DIGITAL</a>
+                        <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`}  onClick={()=>handleClickYT('EdicionDigital')}>EDICION DIGITAL</a>
                     </Link>
                     <Link href="https://clasificados.hoy.bo/" legacyBehavior scroll={false}>
                         <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} >CLASIFICADOS</a>

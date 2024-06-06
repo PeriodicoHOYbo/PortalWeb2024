@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react'
 import { listAll } from 'firebase/storage'
 import Temporizador from '../components/Temporizador'
 import { usePathname } from 'next/navigation'
+import EdicionDigital from '../components/EdicionDigital'
 
 const YOUTUBE_PLAYLIST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/playlistItems'
 const YOUTUBE_API_KEY = "AIzaSyBZkk7x_tGRbf-Yg_A7Y9QYcBQe7T9QtWU"
@@ -92,24 +93,11 @@ function Home() {
         <div className={styles.main}>
           <Header></Header>
 
-          {/* {showImg &&
-
-          <div className='columns-3 gap-2 pb-3'>
-
-            {userDB && userDB.Inicio && Object.keys(userDB.Inicio.Posts).map((i, index) => {
-
-              return <div className='relative' key={index}>
-                <Link href='#' legacyBehavior>
-                  <a target='_blank'>
-                    <img className='block w-full mb-2' src={userDB.Inicio.Posts[i].url} alt="img" />
-                    <span className={styles.description}>{userDB.Inicio.Posts[i].description}</span>
-                  </a>
-                </Link >
-              </div>
-            })}
-          </div>} */}
 
 
+
+
+          {showVideo === 'EdicionDigital' && <EdicionDigital></EdicionDigital>}
 
           {showImg &&
 
@@ -128,11 +116,8 @@ function Home() {
               })}
             </div>}
 
-          {showVideo && listYT !== false &&
-
+          {showVideo === 'YouTube' && listYT !== false &&
             <div className={styles.gridVideos}>
-
-
               {listYT.items.map(({ id, snippet = {} }) => {
                 const { title, thumbnails = {}, resourceId = {} } = snippet;
                 const { medium } = thumbnails;
@@ -163,8 +148,8 @@ function Home() {
                   allowfullscreen />
                 {/* <p className={styles.videoDescription}>Las noticias mas relevantes en <br /> HOY.BO</p> */}
               </div>
-
-            </div>}
+            </div>
+          }
 
           {showImg == false && showVideo == false && <>
             <Section topic="Inicio" publicView={true} color=''></Section>

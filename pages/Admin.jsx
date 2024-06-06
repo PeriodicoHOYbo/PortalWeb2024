@@ -20,26 +20,48 @@ import { handleSignOut, writeUserData } from '../firebase/utils'
 import { uploadIMG } from '../firebase/storage'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import EdicionDigital from '../components/EdicionDigital'
+
+
+const YOUTUBE_PLAYLIST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/playlistItems'
+const YOUTUBE_API_KEY = "AIzaSyBZkk7x_tGRbf-Yg_A7Y9QYcBQe7T9QtWU"
+
+var fetch_url = `${YOUTUBE_PLAYLIST_ITEMS_API}`
+
 
 function Admin() {
-  const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, setUserDate, viewPeriodista, setUserViewPeriodista } = useUser()
+  const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, setUserDate, viewPeriodista, showImg, showVideo, setUserViewPeriodista } = useUser()
   const router = useRouter()
 
 
-  //console.log(postsIMG)
 
-  function handlerUploadFile(e, fileName) {
-    const file = e.target.files[0]
-    uploadIMG(file, fileName, setUserSuccess, postsIMG, setUserPostsIMG)
-  }
 
   const [elements, setElements] = useState(false)
   const [dataForDate, setDataForDate] = useState([])
   const [dataEditor, setDataEditor] = useState(null)
+  const [listYT, setListYT] = useState(false);
 
-  function setPostsElements() {
-    setElements(!elements)
+  const [modalsInterval, setModalsInterval] = useState(false)
+
+  async function getYB() {
+    const res = await fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=8&playlistId=UULFXFA6pzESb1NQMsepmhC6Vw&key=${YOUTUBE_API_KEY}`)
+    const data = await res.json();
+    setListYT(data)
   }
+
+  function redirectYT() {
+    window.open('https://www.youtube.com/@periodicohoybolivia2201/videos', '_blank')
+  }
+
+  useEffect(() => {
+    getYB()
+  }, [])
+
+
+
+
+
+
 
 
   function handlerLogout(e) {
@@ -47,6 +69,9 @@ function Admin() {
     router.push("/Login")
 
   }
+
+
+
 
   function dateEvent(e) {
     const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
@@ -102,7 +127,45 @@ function Admin() {
           <span className='block w-full h-[3px] absolute bottom-[-7px] left-0 bg-[brown]'></span>
         </div>
         <Header></Header>
-        
+        { showVideo === 'EdicionDigital' && <EdicionDigital></EdicionDigital>}
+
+
+
+        {showVideo === 'YouTube' && listYT !== false &&
+            <div className={styles.gridVideos}>
+              {listYT.items.map(({ id, snippet = {} }) => {
+                const { title, thumbnails = {}, resourceId = {} } = snippet;
+                const { medium } = thumbnails;
+                return (
+                  <div key={id} className={styles.boxVideo}>
+
+                    <iframe
+                      className={styles.video}
+                      // width={medium.width}
+                      // height={medium.heigth}
+                      src={`https://www.youtube.com/embed/${resourceId.videoId}`}
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen></iframe>
+
+                    {/* <p className={styles.videoDescription}>{title}</p> */}
+
+                  </div>
+                )
+              })}
+              <div className={styles.boxVideo} onClick={redirectYT}>
+                <img className={styles.seeMoreYT}
+                  src="/seeMoreYT.jpeg"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen />
+                {/* <p className={styles.videoDescription}>Las noticias mas relevantes en <br /> HOY.BO</p> */}
+              </div>
+            </div>
+          }
+        {showImg == false && showVideo == false && <>
         <Section topic="Inicio" publicView={false} color='#8FC2C9'></Section>
         <Section topic="Sociedad" publicView={false} color='#c98f8f'></Section>
         <Section topic="Salud" publicView={false} color='#8FC2C9'></Section>
@@ -114,6 +177,7 @@ function Admin() {
         <Section topic="Cultura" publicView={false} color='#8FC2C9'></Section>
         <Section topic="Internacional" publicView={false} color='#c98f8f'></Section>
         <Section topic="Empresarial" publicView={false} color='#8FC2C9'></Section>
+        </>}
         {userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && <button className={styles.viewPeriodista} onClick={handlerViewPeriodista}>P</button>}
       </main>
 
