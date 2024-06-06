@@ -319,7 +319,6 @@ function TemplateOne() {
         </main>}
       {specificData && router.query.temporal !== undefined &&
         <TemplateNota topic={validate()} publicView={true} banner='none'></TemplateNota>
-
       }
 
       {dataEditor && <Modal carpeta={dataEditor.carpeta} item={dataEditor.item} i={dataEditor.i} close={handlerClickEnlace}></Modal>}

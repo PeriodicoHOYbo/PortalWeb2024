@@ -33,7 +33,7 @@ function Layout({ children }) {
 
     function handlerClickEnlace(data) {
         console.log(data)
-    
+
 
         router.pathname != "/Admin" && window.open(data.href, data.target)
         router.pathname == "/Admin" && setDataEditor(data)
@@ -55,7 +55,7 @@ function Layout({ children }) {
     function numeroAleatorio(min, max) {
         return Math.round(Math.random() * (max - min) + min);
     }
-   
+
     useEffect(() => {
         // let arr2 = ['BannerIzquierdo1', 'BannerIzquierdo2', 'BannerIzquierdo3', 'BannerIzquierdo4','BannerPortada1', 'BannerPortada2', 'BannerPortada3', 'BannerDerecho1', 'BannerDerecho2', 'BannerDerecho3', 'BannerDerecho4','BannerPortada']
 
@@ -65,7 +65,7 @@ function Layout({ children }) {
 
     }, [userDB]);
 
-console.log(userDB)
+    console.log(userDB)
     return (
         <>
             <div className={styles.container} >
@@ -81,7 +81,7 @@ console.log(userDB)
                 </div>
                 <main className={`${styles.main}`}>
                     {children}
-                   {userDB &&  userDB !== undefined &&userDB.EdicionDigital &&  userDB.EdicionDigital !== undefined&& <Link href={`/FlipBook?edicion=${ Object.keys(userDB.EdicionDigital).pop()}`} legacyBehavior scroll={false}>
+                    {userDB && userDB !== undefined && userDB.EdicionDigital && userDB.EdicionDigital !== undefined && <Link href={`/FlipBook?edicion=${Object.keys(userDB.EdicionDigital).pop()}`} legacyBehavior scroll={false}>
                         <a onClick={handlerClick} target="_blank">
                             <img src='/ninoPDF-optimizado.jpeg' className={`${styles.animationNinoPDF}`} />
                         </a>
@@ -139,19 +139,21 @@ console.log(userDB)
                         <div>
                             <br />
                             <br />
-                        
+
                             <div>
-                            <br />
-                            <br />
-                            <div>
-                            <br />
-                                <div className='block w-full'>Nº de Visitas HOY <br />  </div>
-                                <div className={style.container}>
-                                <span className={style.time} style={{ fontSize: '35px', color: 'white', height: '50px' }}>{(new Intl.NumberFormat('es-MX').format(Math.round(getSecondsToday() / ((new Date().getDay() < 3 ? new Date().getDay() + 1 : - 1) * 5) * 5))).replaceAll('-', '')}</span> 
+                                <br />
+                                <br />
+                                <div>
+                                    <br />
+                                    <div className='block w-full'>Nº de Visitas HOY <br />  </div>
+                                    <div className={style.container}>
+                                        <span className={style.time} style={{ fontSize: '35px', color: 'white', height: '50px' }}>
+                                            {Math.round((new Date().getTime() - new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime()) / 6000 * 2.5) }
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                            
+
                             <br />
                             <Link href="/Login" legacyBehavior scroll={false}>
                                 <a onClick={handlerClick}> <span> ©TARKAN Ltda.</span></a>
