@@ -386,7 +386,7 @@
     z-index: 100;
   }
   .viewer p img {
-  max-height: auto;
+  max-height: 50vh;
 }
 
 
