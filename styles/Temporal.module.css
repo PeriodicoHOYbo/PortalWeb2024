@@ -385,6 +385,10 @@
 
     z-index: 100;
   }
+  .viewer p img {
+  max-height: auto;
+}
+
 
   /* .form p img {
     display: inline-block;
