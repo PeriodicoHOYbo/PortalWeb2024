@@ -389,7 +389,12 @@
   max-height: auto;
     width: 100%
 }
-
+.image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
 
   /* .form p img {
     display: inline-block;
