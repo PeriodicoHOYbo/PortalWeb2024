@@ -81,13 +81,12 @@
 
 
 .title {
-  position: relative;
+   position: relative;
   max-width: 100%;
   color: #007483;
   font-size: 50px;
-  overflow: hidden;
   padding: 0;
-  line-height: 50px;
+  line-height: 70px;
   margin: 10px 0;
   font-weight: 700;
 }
