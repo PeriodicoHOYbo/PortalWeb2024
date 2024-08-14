@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import NavbarSimple from '../components/NavbarSimple'
 import { useUser } from '../context/Context.js'
@@ -17,6 +16,7 @@ import BannerNotas from '../components/BannerNotas'
 import Modal from '../components/Modal'
 import Temporizador from '../components/Temporizador'
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
+import Head from 'next/head'
 
 // import { useSpeechSynthesis } from 'react-speech-kit';
 // import {SpeechSynthesis} from '../components/SpeechSynthesis'
@@ -165,19 +165,19 @@ function TemplateOne() {
   }
 
 
- useEffect(() => {
-  if (specificData && specificData[`PostImage_${router.query.temporal}`] && specificData[`PostImage_${router.query.temporal}`].nota) {
-    setTextEditor(specificData[`PostImage_${router.query.temporal}`].nota)
-  } else {
-    getSpecificData(`/Posts/PostImage_${router.query.temporal}`, specificData, setUserSpecificData)
-  }
+  useEffect(() => {
+    if (specificData && specificData[`PostImage_${router.query.temporal}`] && specificData[`PostImage_${router.query.temporal}`].nota) {
+      setTextEditor(specificData[`PostImage_${router.query.temporal}`].nota)
+    } else {
+      getSpecificData(`/Posts/PostImage_${router.query.temporal}`, specificData, setUserSpecificData)
+    }
 
-  if (userDB && userDB[validate()]) {
-    setTitle(userDB[validate()]?.Posts[`PostImage_${router.query.temporal.slice(2)}`]?.title)
-    setDescription(userDB[validate()]?.Posts[`PostImage_${router.query.temporal.slice(2)}`]?.description)
-    setCopyrightIMG(userDB[validate()]?.Posts[`PostImage_${router.query.temporal.slice(2)}`]?.copyrightIMG)
-  }
-}, [userDB, specificData, router.query.temporal])
+    if (userDB && userDB[validate()]) {
+      setTitle(userDB[validate()]?.Posts[`PostImage_${router.query.temporal.slice(2)}`]?.title)
+      setDescription(userDB[validate()]?.Posts[`PostImage_${router.query.temporal.slice(2)}`]?.description)
+      setCopyrightIMG(userDB[validate()]?.Posts[`PostImage_${router.query.temporal.slice(2)}`]?.copyrightIMG)
+    }
+  }, [userDB, specificData, router.query.temporal])
 
 
 
@@ -191,145 +191,187 @@ function TemplateOne() {
   // }, [userDB]);
 
   return (
+    router.query && router.query.temporal && userDB[validate()] && userDB[validate()].Posts && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url !== undefined && <>
 
-    <Layout>
 
-      {specificData && router.query.temporal !== undefined &&
-        <main className={styles.main}>
-          <NavbarSimple footer={false}></NavbarSimple>
 
-          <div className={styles.containerBanner}>
-            {userDB && userDB[validate()] && userDB[validate()]["BannerTop"] && <Banner ruta={validate()} carpeta="BannerTop" click={handlerClickEnlace}></Banner>}
-          </div>
+      <Head>
 
-          <div className={`${styles.viewer} ${formViewer == false && styles.hideForm}`}>
+        <meta property="og:image" content={userDB[validate()] && userDB[validate()].Posts && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url !== undefined && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url} />
 
-            <h2 className={styles.title}>{description}</h2>
-            <p className={styles.description}>{title}</p>
+        {/* <link rel="icon" href="h.png" />
+                    <link rel='apple-touch-icon' href='/h.png' />*/}
+                    <meta name="description" content={description} />
+                    <meta name="keywords" content={{description}} /> 
+        <meta name="author" content="Hoy" />
+        <title>Hoy Bolivia: {validate()}</title>
+        <meta name="google-adsense-account" content="ca-pub-9268005466612059" />
+      </Head>
 
-            <div className={`${styles.containerButtonsPlayer} flex w-full justify-center`}>
-              {specificData && router.query && specificData[`PostImage_${router.query.temporal}`] && specificData[`PostImage_${router.query.temporal}`].nota && <SpeechSynthesis text={parse(textEditor) !== 'En redacción ' && Array.isArray(parse(textEditor)) && parse(textEditor).reduce((acc, result) => {
-                return acc + result.props.children
-              }, '').replaceAll('[object Object]').replaceAll('undefined')} />}
+
+
+
+
+
+
+      <Layout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {specificData && router.query.temporal !== undefined &&
+          <main className={styles.main}>
+            <NavbarSimple footer={false}></NavbarSimple>
+
+            <div className={styles.containerBanner}>
+              {userDB && userDB[validate()] && userDB[validate()]["BannerTop"] && <Banner ruta={validate()} carpeta="BannerTop" click={handlerClickEnlace}></Banner>}
             </div>
 
-            <div className={styles.containerIMGCenter}>
-              <div className={styles.containerIMG}>
-                <img src={userDB[validate()] && userDB[validate()].Posts && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url !== undefined && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url} className={styles.image} alt="" />
-                <span className={styles.copyrightIMG}>{copyrightIMG}</span>
+            <div className={`${styles.viewer} ${formViewer == false && styles.hideForm}`}>
+
+              <h2 className={styles.title}>{description}</h2>
+              <p className={styles.description}>{title}</p>
+
+              <div className={`${styles.containerButtonsPlayer} flex w-full justify-center`}>
+                {specificData && router.query && specificData[`PostImage_${router.query.temporal}`] && specificData[`PostImage_${router.query.temporal}`].nota && <SpeechSynthesis text={parse(textEditor) !== 'En redacción ' && Array.isArray(parse(textEditor)) && parse(textEditor).reduce((acc, result) => {
+                  return acc + result.props.children
+                }, '').replaceAll('[object Object]').replaceAll('undefined')} />}
               </div>
-            </div>
 
-
-
-            {userDB && userDB[validate()] && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].state == 'Publicado' || user
-              ? <div className={`${styles.qlEditor} `} styles={{ padding: '0', height: '50%' }} >
-                <div className={`${styles.editor} ${styles.editorNon}`}>
-                  <TextEditor setValue={handlerTextEditorOnChange} value={textEditor ? textEditor : 'nada'} edit={false}></TextEditor>
+              <div className={styles.containerIMGCenter}>
+                <div className={styles.containerIMG}>
+                  <img src={userDB[validate()] && userDB[validate()].Posts && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url !== undefined && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url} className={styles.image} alt="" />
+                  <span className={styles.copyrightIMG}>{copyrightIMG}</span>
                 </div>
+              </div>
 
-                <br />
 
-                <div className={styles.redactorData}>
-                  <div className={styles.perfil}>
-                    <img src={userDB[validate()] && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor !== undefined && userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor].url} className={styles.perfilIMG} alt="" />
-                    {userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor] && <p>{userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor].name} <br /> Redactor</p>}
+
+              {userDB && userDB[validate()] && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].state == 'Publicado' || user
+                ? <div className={`${styles.qlEditor} `} styles={{ padding: '0', height: '50%' }} >
+                  <div className={`${styles.editor} ${styles.editorNon}`}>
+                    <TextEditor setValue={handlerTextEditorOnChange} value={textEditor ? textEditor : 'nada'} edit={false}></TextEditor>
                   </div>
-                  <span>
-                    {days[new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getDay()]} {' de '}
-                    {new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getDate()} {' de '}
-                    {months[new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getMonth()]} {' de '}
-                    {new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getFullYear()}</span>
+
+                  <br />
+
+                  <div className={styles.redactorData}>
+                    <div className={styles.perfil}>
+                      <img src={userDB[validate()] && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor !== undefined && userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor].url} className={styles.perfilIMG} alt="" />
+                      {userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor] && <p>{userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor].name} <br /> Redactor</p>}
+                    </div>
+                    <span>
+                      {days[new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getDay()]} {' de '}
+                      {new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getDate()} {' de '}
+                      {months[new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getMonth()]} {' de '}
+                      {new Date(userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].fecha).getFullYear()}</span>
+                  </div>
+                </div>
+
+
+                : <div>En redacción...</div>
+
+              }
+              {user && formViewer == true && <div className='w-[90%] max-w-[350px] relative left-0 right-0 bottom-[20px] mx-auto z--50'>
+                <Button style="miniButtonPrimary" click={formViewerHandler}>Editar nota</Button>
+              </div>}
+            </div>
+
+            <div className={styles.adds}>
+
+
+
+              <BannerNotas routeDB={`${validate()}`} items={[1, 2, 3, 4]} click={handlerClickEnlace} admin={formViewer}></BannerNotas>
+
+              {/* <img src="/publicidad.jpg" alt="" /> */}
+            </div>
+
+
+
+            {/* editor */}
+
+
+            {user && <div className={`${styles.viewer} ${formViewer == true && styles.hideForm}`}>
+              <div className='flex w-full'>
+                <label htmlFor="Title" className='w-[100px]' >Titulo</label>
+                <input type="text" id="Title" name="description" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={description} />
+
+              </div>
+              <br />
+              <div className='flex w-full'>
+                <label htmlFor="Description" className='w-[100px]' >Descripcion</label>
+                <input type="text" id="Description" name="title" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={title} />
+
+              </div>
+              <br />
+              <div className='flex w-full'>
+                <label htmlFor="Description" className='w-[100px]' >Autor IMG</label>
+                <input type="text" id="Description" name="copyrightIMG" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={copyrightIMG} />
+              </div>
+
+
+              <h2 className={styles.title}>{description}</h2>
+              <p className={styles.description}>{title}</p>
+
+              <div className={styles.containerIMGCenter}>
+                <div className={styles.containerIMG}>
+                  <img src={userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url} className={styles.image} alt="" />
+                  <span className={styles.copyrightIMG}>{copyrightIMG}</span>
                 </div>
               </div>
-
-
-              : <div>En redacción...</div>
-
-            }
-            {user && formViewer == true && <div className='w-[90%] max-w-[350px] relative left-0 right-0 bottom-[20px] mx-auto z--50'>
-              <Button style="miniButtonPrimary" click={formViewerHandler}>Editar nota</Button>
-            </div>}
-          </div>
-
-          <div className={styles.adds}>
-
-
-
-            <BannerNotas routeDB={`${validate()}`} items={[1, 2, 3, 4]} click={handlerClickEnlace} admin={formViewer}></BannerNotas>
-
-            {/* <img src="/publicidad.jpg" alt="" /> */}
-          </div>
-
-
-
-          {/* editor */}
-
-
-          {user && <div className={`${styles.viewer} ${formViewer == true && styles.hideForm}`}>
-            <div className='flex w-full'>
-              <label htmlFor="Title" className='w-[100px]' >Titulo</label>
-              <input type="text" id="Title" name="description" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={description} />
-
-            </div>
-            <br />
-            <div className='flex w-full'>
-              <label htmlFor="Description" className='w-[100px]' >Descripcion</label>
-              <input type="text" id="Description" name="title" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={title} />
-
-            </div>
-            <br />
-            <div className='flex w-full'>
-              <label htmlFor="Description" className='w-[100px]' >Autor IMG</label>
-              <input type="text" id="Description" name="copyrightIMG" className='block w-full p-1 rounded-[5px] mx-[5px] outline-none border-[1px] border-gray-500' onChange={handlerOnChange} defaultValue={copyrightIMG} />
-            </div>
-
-
-            <h2 className={styles.title}>{description}</h2>
-            <p className={styles.description}>{title}</p>
-
-            <div className={styles.containerIMGCenter}>
-              <div className={styles.containerIMG}>
-                <img src={userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url} className={styles.image} alt="" />
-                <span className={styles.copyrightIMG}>{copyrightIMG}</span>
+              <SpeechToText setValue={setTextEditor} value={textEditor ? textEditor : 'nada'} />
+              <br />
+              <div className={styles.editor}  >
+                <TextEditor setValue={setTextEditor} value={textEditor ? textEditor : 'nada'} edit={true}></TextEditor>
               </div>
-            </div>
-            <SpeechToText setValue={setTextEditor} value={textEditor ? textEditor : 'nada'} />
-            <br />
-            <div className={styles.editor}  >
-              <TextEditor setValue={setTextEditor} value={textEditor ? textEditor : 'nada'} edit={true}></TextEditor>
-            </div>
 
-            <br />
+              <br />
 
-            <input type="checkbox" onClick={handlerChecked} checked={isChecked} /> init
-            <br />
-            <br />
+              <input type="checkbox" onClick={handlerChecked} checked={isChecked} /> init
+              <br />
+              <br />
 
 
-            <div className={styles.buttonsContainer}>
-              <Button style="miniButtonPrimary" click={(e) => save(e, 'B')}> Guardar/Borrador</Button>
-              <Button style="miniButtonPrimary" click={(e) => save(e, 'P')}> Publicar</Button>
-            </div>
-            {user && formViewer == false && <div className='w-[90%] max-w-[350px] relative left-0 right-0  mx-auto py-5'>
-              <Button style="miniButtonPrimary" click={formViewerHandler}>Previsualizar</Button>
+              <div className={styles.buttonsContainer}>
+                <Button style="miniButtonPrimary" click={(e) => save(e, 'B')}> Guardar/Borrador</Button>
+                <Button style="miniButtonPrimary" click={(e) => save(e, 'P')}> Publicar</Button>
+              </div>
+              {user && formViewer == false && <div className='w-[90%] max-w-[350px] relative left-0 right-0  mx-auto py-5'>
+                <Button style="miniButtonPrimary" click={formViewerHandler}>Previsualizar</Button>
+              </div>}
             </div>}
-          </div>}
 
-        </main>}
-      {specificData && router.query.temporal !== undefined &&
-        <TemplateNota topic={validate()} publicView={true} banner='none'></TemplateNota>
-      }
+          </main>}
+        {specificData && router.query.temporal !== undefined &&
+          <TemplateNota topic={validate()} publicView={true} banner='none'></TemplateNota>
+        }
 
-      {dataEditor && <Modal carpeta={dataEditor.carpeta} item={dataEditor.item} i={dataEditor.i} close={handlerClickEnlace}></Modal>}
+        {dataEditor && <Modal carpeta={dataEditor.carpeta} item={dataEditor.item} i={dataEditor.i} close={handlerClickEnlace}></Modal>}
 
-      {success == "save" && <Success>Cargando...</Success>}
+        {success == "save" && <Success>Cargando...</Success>}
 
-      {user === null && <Temporizador topic={validate()} />}
-    </Layout>
+        {user === null && <Temporizador topic={validate()} />}
+      </Layout>
+    </>
   )
 }
 export default WithoutAuth(TemplateOne)
+
+
 
 
 
