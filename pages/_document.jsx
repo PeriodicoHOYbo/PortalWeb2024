@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head>   
+{/*                 <Head>   
                     <link rel="icon" href="h.png" />
                     <link rel='apple-touch-icon' href='/h.png' />
                     <link rel='manifest' href='/manifest.json' />
@@ -21,7 +21,7 @@ export default class MyDocument extends Document {
                     <meta name="author" content="Hoy" />
                     <title>Hoy Bolivia</title>
                     <meta name="google-adsense-account" content="ca-pub-9268005466612059" />
-                </Head>
+                </Head> */}
 
                 <body>
                     <Main />
