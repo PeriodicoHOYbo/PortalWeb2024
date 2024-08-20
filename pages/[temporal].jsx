@@ -214,6 +214,36 @@ function TemplateOne() {
 
 
 
+
+
+      <Head>
+          <title>Bienvenido a Mi Página</title>
+          <meta name="description" content="Esta es una descripción increíble de mi página." />
+
+          {/* Open Graph Meta Tags */}
+          <meta property="og:title" content={`Hoy Bolivia: ${validate()}`} />
+          <meta property="og:description" content="Esta es una descripción increíble de mi página." />
+          <meta property="og:image" content="/gobierno.jpg" />
+          <meta property="og:url" content="/gobierno.jpg" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+
+          {/* Twitter Card Meta Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Bienvenido a Mi Página" />
+          <meta name="twitter:description" content="/gobierno.jpg" />
+          <meta name="twitter:image" content="/gobierno.jpg"" />
+        </Head>
+
+
+
+
+      
+
+
+
+
       <Layout>
 
 
