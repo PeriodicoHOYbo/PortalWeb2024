@@ -222,7 +222,7 @@ function TemplateOne() {
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content="Bienvenido a Mi Página" />
           <meta name="twitter:description" content="/gobierno.jpg" />
-          <meta name="twitter:image" content="/gobierno.jpg"" />
+          <meta name="twitter:image" content="/gobierno.jpg" />
         </Head>
 
 
