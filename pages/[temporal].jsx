@@ -195,18 +195,7 @@ function TemplateOne() {
 
 
 
-      <Head>
-
-        <meta property="og:image" content={userDB[validate()] && userDB[validate()].Posts && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url !== undefined && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].url} />
-
-        {/* <link rel="icon" href="h.png" />
-                    <link rel='apple-touch-icon' href='/h.png' />*/}
-                    <meta name="description" content={description} />
-                    <meta name="keywords" content={{description}} /> 
-        <meta name="author" content="Hoy" />
-        <title>Hoy Bolivia: {validate()}</title>
-        <meta name="google-adsense-account" content="ca-pub-9268005466612059" />
-      </Head>
+    
 
 
 
